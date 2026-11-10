@@ -1,0 +1,45 @@
+name: minestom
+services:
+  minestom:
+    build: .
+    restart: unless-stopped
+    environment:
+      VELOCITY_SECRET_FILE: /run/config/forwarding.secret
+    volumes:
+      - type: bind
+        source: ./velocity/config/forwarding.secret
+        target: /run/config/forwarding.secret
+        read_only: true
+        bind:
+          create_host_path: false
+    expose:
+      - "25565"
+
+  velocity:
+    image: itzg/mc-proxy:java25
+    restart: unless-stopped
+    working_dir: /server
+    environment:
+      TYPE: VELOCITY
+      MEMORY: 512M
+      PLUGINS: >-
+        https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/velocity,
+        https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/velocity
+    ports:
+      - "25566:25565/tcp"
+      - "19133:19132/tcp"
+      - "19133:19132/udp"
+    volumes:
+      - ./velocity/data:/server
+      - type: bind
+        source: ./velocity/config/velocity.toml
+        target: /server/velocity.toml
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ./velocity/config/forwarding.secret
+        target: /server/forwarding.secret
+        bind:
+          create_host_path: false
+    depends_on:
+      - minestom

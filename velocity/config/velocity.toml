@@ -1,0 +1,15 @@
+config-version = "2.7"
+bind = "0.0.0.0:25565"
+motd = "<green>Minestom 26.3 Hello World"
+show-max-players = 10
+online-mode = true
+force-key-authentication = true
+player-info-forwarding-mode = "modern"
+forwarding-secret-file = "forwarding.secret"
+
+[servers]
+hello = "minestom:25565"
+try = ["hello"]
+
+# An omitted section enables Velocity's sample forced-host mappings.
+[forced-hosts]
