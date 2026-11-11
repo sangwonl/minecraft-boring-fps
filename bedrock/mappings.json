@@ -1,0 +1,113 @@
+{
+  "format_version": 2,
+  "items": {
+    "minecraft:snowball": [
+      {
+        "type": "definition",
+        "model": "dm:grenade_flash",
+        "bedrock_identifier": "dm:grenade_flash",
+        "display_name": "Flashbang",
+        "bedrock_options": {
+          "icon": "dm_grenade_flash",
+          "display_handheld": false
+        }
+      }
+    ],
+    "minecraft:fire_charge": [
+      {
+        "type": "definition",
+        "model": "dm:grenade_he",
+        "bedrock_identifier": "dm:grenade_he",
+        "display_name": "HE Grenade",
+        "bedrock_options": {
+          "icon": "dm_grenade_he",
+          "display_handheld": false
+        }
+      }
+    ],
+    "minecraft:firework_star": [
+      {
+        "type": "definition",
+        "model": "dm:grenade_smoke",
+        "bedrock_identifier": "dm:grenade_smoke",
+        "display_name": "Smoke",
+        "bedrock_options": {
+          "icon": "dm_grenade_smoke",
+          "display_handheld": false
+        }
+      }
+    ],
+    "minecraft:iron_sword": [
+      {
+        "type": "definition",
+        "model": "dm:knife",
+        "bedrock_identifier": "dm:knife",
+        "display_name": "Knife",
+        "bedrock_options": {
+          "icon": "dm_knife",
+          "display_handheld": true
+        }
+      }
+    ],
+    "minecraft:stick": [
+      {
+        "type": "definition",
+        "model": "dm:pistol",
+        "bedrock_identifier": "dm:pistol",
+        "display_name": "Pistol",
+        "bedrock_options": {
+          "icon": "dm_pistol",
+          "display_handheld": true
+        }
+      }
+    ],
+    "minecraft:iron_hoe": [
+      {
+        "type": "definition",
+        "model": "dm:rifle",
+        "bedrock_identifier": "dm:rifle",
+        "display_name": "Rifle",
+        "bedrock_options": {
+          "icon": "dm_rifle",
+          "display_handheld": true
+        }
+      }
+    ],
+    "minecraft:iron_shovel": [
+      {
+        "type": "definition",
+        "model": "dm:shotgun",
+        "bedrock_identifier": "dm:shotgun",
+        "display_name": "Shotgun",
+        "bedrock_options": {
+          "icon": "dm_shotgun",
+          "display_handheld": true
+        }
+      }
+    ],
+    "minecraft:golden_hoe": [
+      {
+        "type": "definition",
+        "model": "dm:smg",
+        "bedrock_identifier": "dm:smg",
+        "display_name": "SMG",
+        "bedrock_options": {
+          "icon": "dm_smg",
+          "display_handheld": true
+        }
+      }
+    ],
+    "minecraft:blaze_rod": [
+      {
+        "type": "definition",
+        "model": "dm:sniper",
+        "bedrock_identifier": "dm:sniper",
+        "display_name": "Sniper",
+        "bedrock_options": {
+          "icon": "dm_sniper",
+          "display_handheld": true
+        }
+      }
+    ]
+  }
+}

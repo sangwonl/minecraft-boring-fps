@@ -3,3 +3,4 @@ build/
 velocity/data/
 velocity/config/forwarding.secret
 .DS_Store
+.env

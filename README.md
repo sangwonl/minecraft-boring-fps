@@ -38,12 +38,58 @@ Keep the empty `[forced-hosts]` section in `velocity.toml`. Omitting it makes Ve
 
 Inspect the generated Geyser config to confirm `bedrock.port: 19132` and `bedrock.transport: nethernet` (for recent Bedrock versions). Plugin configuration lives under `velocity/data`. Floodgate is normally auto-detected on the Velocity plugin when the Java address is `auto`; otherwise set `auth-type: floodgate` if present. Restart Velocity after changes.
 
+## Game: free-for-all gun deathmatch
+60×60 arena, 10-minute rounds, instant respawn far from enemies, 2s spawn protection.
+
+### Weapon models and sounds (optional resource pack)
+`resourcepack/` holds 3D weapon models and gunshot sounds (sources and licence in `resourcepack/CREDITS.md`).
+It is zipped into the server jar and served by the game server itself on container port 8080 (host `25567`).
+Tell the server the address players' clients can reach, then start as usual:
+```sh
+RESOURCE_PACK_URL=http://<host-ip>:25567/pack.zip docker compose up -d --build
+```
+Clients are asked to accept the pack on join (required). Without `RESOURCE_PACK_URL` the game runs with vanilla
+items and sounds. Bedrock clients do not get Java resource packs.
+
+Bedrock players get a separate pack through Geyser instead: `./setup.sh` zips `bedrock/pack` plus the sounds into
+`velocity/data/plugins/Geyser-Velocity/packs/dm.mcpack` and installs `bedrock/mappings.json` as Geyser custom item
+mappings. Geyser pushes the pack on join; restart Velocity after re-running `setup.sh`. On Bedrock the weapons are
+flat icons (rendered from the Java models), not 3D models. Regenerate `bedrock/` after changing the Java pack with
+`python3 tools/bedrock.py .` (needs numpy and Pillow).
+
+Code lives in `src/main/java/dev/pineple/minecraft/deathmatch/`:
+
+| Class | Responsibility |
+|---|---|
+| `Match` | Rules and lifecycle: join/leave, damage and kill credit, respawn, round timer. |
+| `Combatant` | One player in the match: hitbox, health, score, spawn protection, their `Loadout`. |
+| `Weapon` | Interface for a hotbar slot. `Gun`, `Knife`, `Grenade` implement it and own their state. |
+| `Gun.Spec` / `Grenade.Kind` | Tuning table for guns / what each grenade does on detonation. |
+| `Arena` | The map: construction, spawn points, cover and line-of-sight queries. |
+| `Hud` | Sidebar, round timer, kill feed. |
+| `Controls` | Maps Minecraft input events to `Match` and `Weapon` calls. |
+| `Ballistics` | Pure ray/bounce math, self-checked at boot. |
+| `ResourcePack` | Serves the pack and maps weapon ids to its models and sounds, with vanilla fallback. |
+
+| Slot | Item | Notes |
+|---|---|---|
+| 1-5 | Rifle / SMG / Shotgun / Sniper / Pistol | Left-click to fire (one shot per click), `F` to reload (auto when empty). Ammo = XP level number. Headshots 4×. |
+| 6 | Knife | Left-click. |
+| 7-9 | HE / Flashbang / Smoke | Left-click to throw; bounces off walls and floor, 1.6s fuse. One of each per life. |
+
+- **Spray and recoil**: sustained fire widens spread and kicks the view up; jumping adds spread. Pause ~0.5s to reset.
+- **Wall penetration**: bullets pass thin cover with reduced damage (kill feed shows `▒`). Planks are soft, stone/brick
+  cost double, iron blocks are bulletproof. Shotgun does not penetrate.
+- **Sniper scope**: right-click toggles zoom (also slows you). Unscoped shots are inaccurate. Needs the client's
+  "FOV Effects" setting above 0.
+- **Smoke** blocks vision only and is invisible to clients on "Particles: Minimal". **Flash** uses the Blindness effect.
+
 ## Security / caveats
 - Backend Minestom port is not exposed on the host. Velocity authenticates and forwards identity using `forwarding.secret`.
 - Snapshot `26_3-SNAPSHOT` changes over time. Use `--no-cache` to refresh dependency only when you intend to.
 - The build and Switch connection have not been executed/tested here; API changes or unsupported protocol behavior may need adjustments.
 - Stop: `docker compose down` (does not remove `velocity/data`).
-- The Minestom world is a minimal flat ephemeral world; it is not persisted.
+- The arena is generated in code at boot; nothing is persisted.
 - If you use an older Java runtime/unsupported image, use a Java 25-capable host/image.
 
 Sources:

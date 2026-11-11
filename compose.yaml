@@ -5,6 +5,10 @@ services:
     restart: unless-stopped
     environment:
       VELOCITY_SECRET_FILE: /run/config/forwarding.secret
+      # Where players' clients download the weapon pack, e.g. http://<host-ip>:25567/pack.zip. Empty = vanilla look.
+      RESOURCE_PACK_URL: ${RESOURCE_PACK_URL:-}
+    ports:
+      - "25567:8080/tcp"
     volumes:
       - type: bind
         source: ./velocity/config/forwarding.secret

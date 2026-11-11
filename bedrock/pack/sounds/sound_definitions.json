@@ -1,0 +1,47 @@
+{
+  "format_version": "1.14.0",
+  "sound_definitions": {
+    "dm:rifle_fire": {
+      "category": "player",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/dm/rifle_fire"
+      ]
+    },
+    "dm:smg_fire": {
+      "category": "player",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/dm/smg_fire"
+      ]
+    },
+    "dm:shotgun_fire": {
+      "category": "player",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/dm/shotgun_fire"
+      ]
+    },
+    "dm:sniper_fire": {
+      "category": "player",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/dm/sniper_fire"
+      ]
+    },
+    "dm:pistol_fire": {
+      "category": "player",
+      "max_distance": 64,
+      "sounds": [
+        "sounds/dm/pistol_fire"
+      ]
+    },
+    "dm:reload": {
+      "category": "player",
+      "max_distance": 16,
+      "sounds": [
+        "sounds/dm/reload"
+      ]
+    }
+  }
+}

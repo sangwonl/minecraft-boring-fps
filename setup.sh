@@ -26,5 +26,24 @@ else
   echo 'Using existing forwarding secret.'
 fi
 
+# Docker Desktop cannot create a file mountpoint inside the bind-mounted velocity/data on the fly,
+# so the two files mounted over it must already exist there.
+mkdir -p velocity/data
+for mountpoint in velocity/data/velocity.toml velocity/data/forwarding.secret; do
+  [[ -e "$mountpoint" ]] || : > "$mountpoint"
+done
+
+# Bedrock players get their own pack (icons + sounds) and item mappings through Geyser.
+geyser=velocity/data/plugins/Geyser-Velocity
+stage=$(mktemp -d)
+mkdir -p "$geyser/packs" "$geyser/custom_mappings" "$stage/sounds/dm"
+cp -R bedrock/pack/. "$stage"
+cp resourcepack/assets/dm/sounds/*.ogg "$stage/sounds/dm/"
+rm -f "$geyser/packs/dm.mcpack"
+(cd "$stage" && zip -qr - .) > "$geyser/packs/dm.mcpack"
+cp bedrock/mappings.json "$geyser/custom_mappings/dm.json"
+rm -rf "$stage"
+echo 'Installed Bedrock pack and item mappings for Geyser.'
+
 echo 'Run: docker compose up -d --build'
 echo 'Java: host-ip:25566 | Bedrock: host-ip:19133'

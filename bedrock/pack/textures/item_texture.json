@@ -1,0 +1,33 @@
+{
+  "resource_pack_name": "dm",
+  "texture_name": "atlas.items",
+  "texture_data": {
+    "dm_grenade_flash": {
+      "textures": "textures/items/dm/grenade_flash"
+    },
+    "dm_grenade_he": {
+      "textures": "textures/items/dm/grenade_he"
+    },
+    "dm_grenade_smoke": {
+      "textures": "textures/items/dm/grenade_smoke"
+    },
+    "dm_knife": {
+      "textures": "textures/items/dm/knife"
+    },
+    "dm_pistol": {
+      "textures": "textures/items/dm/pistol"
+    },
+    "dm_rifle": {
+      "textures": "textures/items/dm/rifle"
+    },
+    "dm_shotgun": {
+      "textures": "textures/items/dm/shotgun"
+    },
+    "dm_smg": {
+      "textures": "textures/items/dm/smg"
+    },
+    "dm_sniper": {
+      "textures": "textures/items/dm/sniper"
+    }
+  }
+}
