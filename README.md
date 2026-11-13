@@ -3,6 +3,10 @@
 A free-for-all FPS deathmatch server for Minecraft, built with Minestom, Velocity, and Geyser.
 Supports Java and Bedrock Edition and runs independently of any existing Paper server.
 
+https://github.com/user-attachments/assets/ff3e583c-7e79-4114-9afe-3409f340bc3b
+
+\[Captured by [Snapr](https://snapr.pineple.com)\]
+
 ## Features
 
 - 60×60 arena, 10-minute rounds, instant respawn, and 2-second spawn protection
