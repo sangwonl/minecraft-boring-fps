@@ -7,7 +7,7 @@ import dev.pineple.minecraft.deathmatch.Deathmatch;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public final class HelloMinestom {
+public final class BoringFps {
     public static void main(String[] args) throws Exception {
         String secret = Files.readString(Path.of(System.getenv("VELOCITY_SECRET_FILE"))).trim();
         MinecraftServer server = MinecraftServer.init(new Auth.Velocity(secret));

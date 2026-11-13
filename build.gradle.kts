@@ -29,5 +29,5 @@ val pack by tasks.registering(Zip::class) {
 tasks.processResources { from(pack) }
 
 application {
-    mainClass.set("dev.pineple.minecraft.HelloMinestom")
+    mainClass.set("dev.pineple.minecraft.BoringFps")
 }
