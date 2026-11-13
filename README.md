@@ -3,7 +3,7 @@
 A free-for-all FPS deathmatch server for Minecraft, built with Minestom, Velocity, and Geyser.
 Supports Java and Bedrock Edition and runs independently of any existing Paper server.
 
-https://github.com/user-attachments/assets/ff3e583c-7e79-4114-9afe-3409f340bc3b
+https://github.com/user-attachments/assets/0073354d-20b4-4e4e-9fab-9964afce47c8
 
 \[Captured by [Snapr](https://snapr.pineple.com)\]
 
@@ -71,18 +71,5 @@ Ammo is displayed as the XP level number. Right-click with the sniper to toggle 
 - The `26_3-SNAPSHOT` dependency may change over time. A Java 25-capable environment is required.
 - The arena is generated at startup; map and game state are not persisted. Stopping the stack preserves `velocity/data`.
 - The build and Switch connection have not been verified; API or protocol changes may require adjustments.
-
-### Fixing `forwarding.secret: Is a directory`
-
-If Docker created the secret path as a directory, run the following. `rmdir` removes only an empty directory; if it fails, inspect the contents before removing anything.
-
-```sh
-docker compose down
-./setup.sh
-if [ -d velocity/data/forwarding.secret ]; then
-  rmdir velocity/data/forwarding.secret || exit 1
-fi
-docker compose up -d --build
-```
 
 Game code lives in `src/main/java/dev/pineple/minecraft/deathmatch/`; the Java resource pack is in `resourcepack/`. See [CREDITS.md](resourcepack/CREDITS.md) for asset sources and licenses.
